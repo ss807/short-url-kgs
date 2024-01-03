@@ -8,14 +8,15 @@ const URL = require("./models/url");
 
 const urlRoute = require("./routes/url");
 const userRoute = require("./routes/user");
-
+const cors = require('cors');
 const app = express();
 const PORT = 8001;
-console.log(process.env.MONGODB);
+
 connectToMongoDB(process.env.MONGODB).then(() =>
   console.log("Mongodb Server connected")
 );
 
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
