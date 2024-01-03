@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "59c1044e-fe0a-4884-b7b8-1b44c851801a",
+		"name": "URL Shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14218741"
+	},
+	"item": [
+		{
+			"name": "Create a short URL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://www.google.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/url",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"url"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch analytics data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/url/analytics/5P1-C7bKt",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"url",
+						"analytics",
+						"5P1-C7bKt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect to long URL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/5P1-C7bKt",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"5P1-C7bKt"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
