@@ -8,6 +8,10 @@ async function handleUserSignup(req, res) {
   // name, email and password from request body
   const { name, email, password } = req.body;
 
+  const user = await User.findOne({ email });
+
+  if(user) 
+    return res.json({'message': 'Email already exist'})
   // adding the  user in the user database
   await User.create({
     name,
