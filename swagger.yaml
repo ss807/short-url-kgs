@@ -1,0 +1,80 @@
+
+"openapi": "3.0.0"
+"info":
+  "title": "URL Shortener API"
+  "description": "This documentation contains all the api which are there in the URL Shortner"
+  "version": "1.0.0"
+"servers":
+  -
+    "url": "https://kgs-short-url.onrender.com"
+"paths":
+  "/url/":
+    "post":
+      "summary": "Create a short URL"
+      "requestBody":
+        "content":
+          "application/json":
+            "example":
+              "url": "https://www.google.in"
+      "responses":
+        "200":
+          "description": "URL shortening successful"
+  "/url/analytics/{shortCode}":
+    "get":
+      "summary": "Fetch analytics data"
+      "parameters":
+        -
+          "name": "shortCode"
+          "in": "path"
+          "required": true
+          "schema":
+            "type": "string"
+      "responses":
+        "200":
+          "description": "Analytics data retrieved"
+        "404":
+          "description": "Short URL not found"
+  "/{shortCode}":
+    "get":
+      "summary": "Redirect to long URL"
+      "parameters":
+        -
+          "name": "shortCode"
+          "in": "path"
+          "required": true
+          "schema":
+            "type": "string"
+      "responses":
+        "302":
+          "description": "Redirect to long URL"
+        "404":
+          "description": "Short URL not found"
+  "/user/signup":
+    "post":
+      "summary": "Signup for a user"
+      "requestBody":
+        "content":
+          "application/json":
+            "example":
+              "name": "Shubham Goyal"
+              "email": "shubham1@gmail.com"
+              "password": "123123"
+      "responses":
+        "201":
+          "description": "User signup successful"
+        "400":
+          "description": "Bad request"
+  "/user/login":
+    "post":
+      "summary": "Login for a user"
+      "requestBody":
+        "content":
+          "application/json":
+            "example":
+              "email": "shubham1@gmail.com"
+              "password": "123123"
+      "responses":
+        "200":
+          "description": "User login successful"
+        "401":
+          "description": "Unauthorized"

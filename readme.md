@@ -2,6 +2,12 @@
 
 This repository contains a **URL Shortener** . This URL Shortner can create short URLs, fetch analytics data, redirect to long URLs, signing up a user, and logging in a user.
 
+## Swagger
+Please check `swagger.yaml` for Swagger documentation.
+
+## Postman Collection
+Please check `URL-Shortener.postman_collection.json` for Postman collection.
+
 
 ## User flow
 
