@@ -43,7 +43,8 @@ app.get("/:shortId", async (req, res) => {
       },
     }
   );
-  console.log(entry.redirectURL);
+  if (!entry) return res.status(400).json({ error: "wrong url, short url not mapped to any url" });
+  console.log(entry?.redirectURL);
   res.redirect(entry.redirectURL);
 });
 
