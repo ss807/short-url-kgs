@@ -40,12 +40,18 @@ async function handleUserLogin(req, res) {
   // maping this user to this session id in sessionIdToUserMap 
   setUser(sessionId, user);
 
-  // setting the cookie 
+  // setting the cookie
   res.cookie("uid", sessionId);
   return res.json({'message': 'Logged in successfully.'})
+}
+
+async function handleUserLogout(req, res) {
+  res.status(200).clearCookie('uid');
+  return res.json({'message': 'Logged out successfully.'})
 }
 
 module.exports = {
   handleUserSignup,
   handleUserLogin,
+  handleUserLogout
 };
