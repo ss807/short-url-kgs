@@ -3,11 +3,13 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const { connectToMongoDB } = require("./connect");
-const { restrictToLoggedinUserOnly } = require("./middlewares/auth");
+const { restrictToLoggedinUserOnly, checkAuthAndGetUser } = require("./middlewares/auth");
 const URL = require("./models/url");
 
 const urlRoute = require("./routes/url");
 const userRoute = require("./routes/user");
+const staticRoute = require("./routes/static");
+
 const cors = require('cors');
 const app = express();
 const PORT = 8001;
@@ -16,10 +18,17 @@ connectToMongoDB(process.env.MONGODB).then(() =>
   console.log("Mongodb Server connected")
 );
 
+// load static assets
+app.use('/static', express.static(path.join(__dirname, 'assets')))
+
+app.set("view engine", "ejs");
+app.set("views", path.resolve("./views"));
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use("/", checkAuthAndGetUser, staticRoute);
 
 // /url route is for shortening the url and getting analytics of the url
 app.use("/url", restrictToLoggedinUserOnly, urlRoute);

@@ -4,22 +4,21 @@ const { setUser } = require("../service/auth");
 
 // callback function for signup api
 async function handleUserSignup(req, res) {
-
+  console.log(req.body)
   // name, email and password from request body
   const { name, email, password } = req.body;
 
   const user = await User.findOne({ email });
 
   if(user) 
-    return res.json({'message': 'Email already exist'})
+    return res.render("signup", { message : 'Email already exist'});
   // adding the  user in the user database
   await User.create({
     name,
     email,
     password,
   });
-
-  return res.json({'message': 'Successfully Signed Up, Login to continue'})
+  return res.render("login", { message : 'Successfully Signed Up, Login to continue'});
 }
 
 // callback function for login api
@@ -32,7 +31,7 @@ async function handleUserLogin(req, res) {
   const user = await User.findOne({ email, password });
 
   if (!user)
-    return res.json({'message': 'Invalid Username or Password'})
+    return res.render("login", { invalid : "Invalid Username or Password"});
 
   // generating a session id for this login
   const sessionId = uuidv4();
@@ -42,12 +41,12 @@ async function handleUserLogin(req, res) {
 
   // setting the cookie
   res.cookie("uid", sessionId);
-  return res.json({'message': 'Logged in successfully.'})
+  return res.redirect("/");
 }
 
 async function handleUserLogout(req, res) {
   res.status(200).clearCookie('uid');
-  return res.json({'message': 'Logged out successfully.'})
+  return res.render("login", { message : "logged out Successfully...!"});
 }
 
 module.exports = {
