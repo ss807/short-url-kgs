@@ -8,4 +8,8 @@ router.post("/signup", handleUserSignup);
 router.post("/login", handleUserLogin);
 router.post("/logout", handleUserLogout);
 
+router.get("/", (req, res) => {
+    return res.redirect(process.env.BASE_URL);
+  });
+
 module.exports = router;
