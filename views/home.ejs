@@ -29,13 +29,13 @@
       <div>
         <ol class="list-group list-group-numbered">
           <% urls.forEach((url, index) => { %>
-            <li class="list-group-item d-flex justify-content-left align-items-start" a href="<%= url.shortURL %>">
+            <a class="list-group-item d-flex justify-content-left align-items-start" target="_blank" href="<%= process.env.BASE_URL %>/<%= url.shortId %>">
               <div class="ms-2 me-auto">
-                <div class="fw-bold" ><%= url.shortId %></div>
+                <div class="fw-bold justify-content-left" ><%= process.env.BASE_URL %>/<%= url.shortId %></div>
                 <%= url.redirectURL %>
               </div>
               <span class="badge bg-primary rounded-pill"><%= url.visitHistory.length %> clicks</span>
-            </li>
+            </a>
             <% }) %>
         </ol>
       </div>
