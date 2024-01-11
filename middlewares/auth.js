@@ -5,11 +5,11 @@ async function restrictToLoggedinUserOnly(req, res, next) {
   // get uid from cookie
   const userUid = req.cookies?.uid;
 
-  if (!userUid) return res.json({"message": "Not logged in"});
+  if (!userUid) return res.redirect(process.env.BASE_URL);
   
   // check if the logged in user is a valid user on platform
   const user = getUser(userUid);
-  if (!user) return res.json({"message": "User not found"});
+  if (!user) return res.redirect(process.env.BASE_URL);
 
   // attach user with request to enable its usage in scope of API
   req.user = user;

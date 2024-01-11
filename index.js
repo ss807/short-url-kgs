@@ -52,7 +52,7 @@ app.get("/:shortId", async (req, res) => {
       },
     }
   );
-  if (!entry) return res.status(400).json({ error: "wrong url, short url not mapped to any url" });
+  if (!entry) return res.render("signup", { message : "This short url is not mapped to any url. Start creating your own urls and analyze them"}); 
   console.log(entry?.redirectURL);
   res.redirect(entry.redirectURL);
 });
