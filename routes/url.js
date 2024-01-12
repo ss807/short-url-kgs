@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-  handleGetAnalytics,
+  handleGetAnalytics, handleDeleteURL, handleArchiveURL
 } = require("../controllers/analytics");
 
 const {
@@ -18,4 +18,7 @@ router.get("/", (req, res) => {
 // route to get the analytics of a url
 router.get("/analytics/:shortId", handleGetAnalytics);
 
+router.delete("/:shortId", handleDeleteURL);
+
+router.put("/archive", handleArchiveURL)
 module.exports = router;

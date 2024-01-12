@@ -13,6 +13,30 @@ async function handleGetAnalytics(req, res) {
   });
 }
 
+async function handleDeleteURL(req, res) {
+  const shortId = req.params.shortId;
+  try {
+    await URL.deleteOne({shortId: shortId});
+    return res.json({message: "Successfully deleted"})
+  } catch (error) {
+    return res.json({message: error})
+  }
+}
+
+async function handleArchiveURL(req, res) {
+  
+  const shortIds = req.body?.urls;
+  console.log(shortIds);
+  try {
+    await URL.updateMany({shortId: { $in: shortIds}}, { status: 'archive'});
+    return res.json({message: "Successfully Archived"})
+  } catch (error) {
+    return res.json({message: error})
+  }
+}
+
 module.exports = {
   handleGetAnalytics,
+  handleDeleteURL,
+  handleArchiveURL
 };
