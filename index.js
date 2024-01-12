@@ -54,7 +54,11 @@ app.get("/:shortId", async (req, res) => {
   );
   if (!entry) return res.render("signup", { message : "This short url is not mapped to any url. Start creating your own urls and analyze them"}); 
   console.log(entry?.redirectURL);
-  res.redirect(entry.redirectURL);
+  if(entry?.status === "archived"){
+    return res.json({message: "This URL is archived"})
+  } else{
+    res.redirect(entry.redirectURL);
+  }
 });
 
 app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));
